@@ -34,7 +34,7 @@ npm start
 
 5. Open the editor of your choice and edit the files.
 
-## Data for the REST API part of the class.
+## Configuration and Data for the REST API part of the class (Day 3)
 
 Here is the `scripts` configuration which can be copied and pasted for the REST API portion of the class. When asked by the instructor, replace the `scripts` section of the `package.json` file in the `demo-app` project with the `scripts` section below.
 
