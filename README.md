@@ -4,6 +4,10 @@
 
 [https://www.t4d.io/wintellect-typescript-with-react-and-redux-04272020](https://www.t4d.io/wintellect-typescript-with-react-and-redux-04272020)
 
+## Other Links
+
+The instructor will distribute additional private links during class for downloading courseware, registering for class completion badges, and downloading recordings...
+
 ## How to Use the Instructor's Version
 
 The following instructions will help students pull down the instructor's version to resume class where the instructor is.
