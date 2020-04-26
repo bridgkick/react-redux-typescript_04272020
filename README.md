@@ -76,6 +76,11 @@ Here is the `db.json` JSON which can be copied and pasted for the REST API porti
 ```
 
 <br><br>
-All course content and teaching is provided by: [<img src="images/t4dio-logo.gif" alt="T4D.IO Logo" style="vertical-align:middle">](http://www.t4d.io)
+<style>
+  .logo {
+    vertical-align:top;
+  }
+</style>
+All course content and teaching is provided by: [<img src="images/t4dio-logo.gif" alt="T4D.IO Logo" style="vertical-align:top" class="logo">](http://www.t4d.io)
 
 
