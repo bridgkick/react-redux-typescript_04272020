@@ -77,7 +77,7 @@ Here is the `db.json` JSON which can be copied and pasted for the REST API porti
 
 ## Course Content
 
-All course content and teaching is provided by:<br>
+All course content and teaching is provided by:<br><br>
 [![T4D.IO Logo](images/t4dio-logo.png "T4D.IO Logo")](https://www.t4d.io)
 
 
