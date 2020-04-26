@@ -8,6 +8,8 @@
 
 The instructor will distribute additional private links during class for downloading courseware, registering for class completion badges, and downloading recordings...
 
+All code in this repository is distbuted under the [MIT license](license.txt).
+
 ## How to Use the Instructor's Version
 
 The following instructions will help students pull down the instructor's version to resume class where the instructor is.
