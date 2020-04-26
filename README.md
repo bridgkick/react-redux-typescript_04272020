@@ -1,4 +1,4 @@
-# Welcome to TypeScript with React and Redux Class
+# Welcome to the TypeScript with React and Redux Class
 
 ![Wintellect Logo](images/wintellect-logo.png "Wintellect Logo")
 
