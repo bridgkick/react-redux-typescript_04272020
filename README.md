@@ -4,7 +4,7 @@
 
 [https://www.t4d.io/wintellect-typescript-with-react-and-redux-04272020](https://www.t4d.io/wintellect-typescript-with-react-and-redux-04272020)
 
-## Other Links
+## Other Resources
 
 The instructor will distribute additional private links during class for downloading courseware, registering for class completion badges, and downloading recordings...
 
