@@ -11,7 +11,10 @@ export const ColorTool = () => {
     { id: 4, name: 'brown' },
   ];
 
-  const colorListItems = colors.map(color =>
+  const colorListItems = colors.map( (color: {
+    id?: number;
+    name: string;
+  }) =>
     <li key={color.id}>{color.name}</li>)
 
   return (
