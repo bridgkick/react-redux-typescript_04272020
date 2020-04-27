@@ -1,28 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// named import
 import { HelloWorld } from './components/HelloWorld';
+import { CarTool } from './components/CarTool';
 
 ReactDOM.render(
-  // React.createElement(HelloWorld),
-  <HelloWorld />,
+  <>
+    <HelloWorld />
+    <CarTool />
+  </>,
   document.querySelector('#root'),
 );
-
-
-
-
-
-// // function declaration
-// function HelloWorld() {
-//   return React.createElement('h1', null, 'Hello World!');
-// }
-
-// // function expression
-// const HelloWorld2 = function() {
-//   return React.createElement('h1', null, 'Hello World!');
-// };
-
-
-
