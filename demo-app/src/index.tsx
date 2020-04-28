@@ -15,6 +15,7 @@ const colorList: Color[] = [
 
 ReactDOM.render(
   <>
+    {/* React.createElement(ColorTool, { colors: colorList } <= is the props object); */}
     <ColorTool colors={colorList} />
     <CarTool />
   </>,
