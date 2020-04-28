@@ -15,13 +15,27 @@ type HTMLFormControls = HTMLInputElement | HTMLSelectElement | HTMLTextAreaEleme
 
 export const ColorTool: FC<ColorToolProps> = (props) => {
 
+  // const colorsStateArray = useState<Color[]>(props.colors.concat());
+  // const colorsStateData = colorsStateArray[0];
+  // const colorsStateUpdateFunction = colorsStateArray[1];
+
+  // array destructuring
+  // const [ /* 0 */ colorsStateData, /* 1 */ colorsStateUpdateFunction ] = useState<Color[]>(props.colors.concat());
+
+  // const colorsStateObject = useState2({});
+  // colorsStateObject.data;
+  // colorsStateObject.updateAndRender(newData);
+  // const { data: colorForm, updateAndRender: setColorForm } = useState2({});
+  // const { data: colors, updateAndRender: setColors } = useState2([]);
+
+  // const [ colors, setColors ] = useState<Color[]>(props.colors.concat());
+
+  const [ colors, setColors ] = useState<Color[]>([ ...props.colors ]);
+
   // colorForm is the state data
   // setColorForm is the function to update the data and re-render the component
-  const [ colorForm, setColorForm ] = useState<any>(
+  const [ colorForm, setColorForm ] = useState<ColorFormState>(
       { colorName: '', colorHexcode: '', } /* initial value only used on initial render */);
-
-  const colorListItems = props.colors.map((color) =>
-    <li key={color.id}>{color.name}</li>);
 
   const change = (e: ChangeEvent<HTMLFormControls>) => {
 
@@ -35,6 +49,21 @@ export const ColorTool: FC<ColorToolProps> = (props) => {
 
   };
 
+  const addColor = () => {
+
+    setColors(colors.concat({
+      // ...colorForm,
+      name: colorForm.colorName,
+      id: Math.max(...colors.map(c => c.id) as [], 0) + 1
+    }));
+
+    setColorForm({
+      colorName: '',
+      colorHexcode: '',
+    });
+
+  };
+
   console.log(colorForm);
 
   return (
@@ -43,7 +72,8 @@ export const ColorTool: FC<ColorToolProps> = (props) => {
         <h1>Color Tool</h1>
       </header>
       <ul>
-        {colorListItems}
+        {colors.map((color) =>
+          <li key={color.id}>{color.name}</li>)}
       </ul>
       <form>
         <div>
@@ -53,9 +83,10 @@ export const ColorTool: FC<ColorToolProps> = (props) => {
         </div>
         <div>
           <label htmlFor="color-hexcode-input">Color Hexcode</label>
-          <input type="number" id="color-hexcode-input" name="colorHexcode"
+          <input type="text" id="color-hexcode-input" name="colorHexcode"
             value={colorForm.colorHexcode} onChange={change} />
         </div>
+        <button type="button" onClick={addColor}>Add Color</button>
       </form>
     </>
   );
