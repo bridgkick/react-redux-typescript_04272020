@@ -7,13 +7,25 @@ export interface CarViewRowProps {
   onDeleteCar: (carId: number) => void;
 }
 
+const validCarId: (carId: number | undefined) => boolean = (carId) => {
+
+  if (typeof carId === "undefined") {
+    return false;
+  }
+
+  if (carId < 1) {
+    return false;
+  }
+
+  return true;
+
+};
+
 export const CarViewRow: FC<CarViewRowProps> = ({ car, onDeleteCar }) => {
 
   const deleteCar = () => {
 
-    // onDeleteCar(car.id as number);
-
-    if ("id" in car && typeof car.id !== "undefined") {
+    if (typeof car.id !== "undefined") {
       onDeleteCar(car.id);
     }
   };
@@ -27,9 +39,9 @@ export const CarViewRow: FC<CarViewRowProps> = ({ car, onDeleteCar }) => {
       <td>{car.color}</td>
       <td>{car.price}</td>
       <td>
-        <button type="button" onClick={deleteCar}>
+        {validCarId(car.id) && <button type="button" onClick={deleteCar}>
           Delete
-        </button>
+        </button>}
       </td>
     </tr>
   );
