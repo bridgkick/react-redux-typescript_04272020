@@ -2,6 +2,8 @@ import React, { FC, useState, ChangeEvent } from 'react';
 
 import { Color } from '../models/Color';
 
+import { ToolHeader } from './ToolHeader';
+
 export interface ColorToolProps {
   colors: readonly Color[];
 }
@@ -68,9 +70,7 @@ export const ColorTool: FC<ColorToolProps> = (props) => {
 
   return (
     <>
-      <header>
-        <h1>Color Tool</h1>
-      </header>
+      <ToolHeader headerText="Color Tool" />
       <ul>
         {colors.map((color) =>
           <li key={color.id}>{color.name}</li>)}

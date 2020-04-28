@@ -36,6 +36,8 @@ const blankToNaN = (x: string) => {
 
 export const CarTool: FC<CarToolProps> = (props) => {
 
+  const [ cars, setCars ] = useState<Car[]>(props.cars.concat());
+
   const [ carForm, setCarForm ] = useState<CarFormState>({
     make: '',
     model: '',
@@ -54,6 +56,15 @@ export const CarTool: FC<CarToolProps> = (props) => {
     });
 
   };
+
+  const addCar = () => {
+
+    setCars(cars.concat({
+      ...carForm,
+      id: Math.max(...cars.map(c => c.id) as [], 0) + 1,
+    }));
+
+  }
 
   console.log(carForm);
 
@@ -74,7 +85,7 @@ export const CarTool: FC<CarToolProps> = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.cars.map(car => <tr key={car.id}>
+          {cars.map(car => <tr key={car.id}>
             <td>{car.id}</td>
             <td>{car.make}</td>
             <td>{car.model}</td>
@@ -110,6 +121,7 @@ export const CarTool: FC<CarToolProps> = (props) => {
           <input type="number" id="price-input" name="price"
             value={nanToBlank(carForm.price)} onChange={change} />
         </div>
+        <button type="button" onClick={addCar}>Add Car</button>
       </form>
     </>
   );
