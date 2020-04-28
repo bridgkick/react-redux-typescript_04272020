@@ -53,7 +53,7 @@ export const ColorTool: FC<ColorToolProps> = (props) => {
         </div>
         <div>
           <label htmlFor="color-hexcode-input">Color Hexcode</label>
-          <input type="text" id="color-hexcode-input" name="colorHexcode"
+          <input type="number" id="color-hexcode-input" name="colorHexcode"
             value={colorForm.colorHexcode} onChange={change} />
         </div>
       </form>
