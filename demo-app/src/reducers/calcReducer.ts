@@ -1,15 +1,12 @@
-import { Reducer } from 'redux';
+import { combineReducers, AnyAction } from 'redux';
 
 import { HistoryEntry } from '../models/HistoryEntry';
 
-import {
-  CalcOpAction, CalcHistoryEntryAction,
-  ADD_ACTION, SUBTRACT_ACTION,
-  MULTIPLY_ACTION, DIVIDE_ACTION,
-  CLEAR_ACTION, DELETE_HISTORY_ENTRY_ACTION,
-  VALIDATION_ACTION,
-  CalcValidationAction,
-} from '../actions/calcActions';
+import { CalcOpAction } from '../actions/calcActions';
+import { resultReducer } from './resultReducer';
+import { historyReducer, HistoryReducerAction } from './historyReducer';
+import { validationMessageReducer, ValidationMessageReducerAction } from './validationMessageReducer';
+import { Reducer } from 'react';
 
 export interface CalcState {
   result: number;
@@ -17,59 +14,19 @@ export interface CalcState {
   validationMessage: string;
 }
 
-type CalcReducerAction = CalcOpAction | CalcHistoryEntryAction | CalcValidationAction;
+// this is the function produced by combine reducers
+export const calcReducerExample: Reducer<CalcState, AnyAction> = (state, action) => {
 
-type CalcReducer = Reducer<CalcState, CalcReducerAction>;
-
-const initialCalcReducerState = { result: 0, history: [], validationMessage: '', };
-
-export const calcReducer: CalcReducer = (state = initialCalcReducerState, action) => {
-
-  switch (action.type) {
-    case ADD_ACTION:
-      return {
-        ...state,
-        // result: state.result + (('num' in action.payload) ? action.payload.num : 0),
-        result: state.result + (action as CalcOpAction).payload.num,
-        history: state.history.concat({ opName: '+', opValue: (action as CalcOpAction).payload.num }),
-      };
-    case SUBTRACT_ACTION:
-      return {
-        ...state,
-        result: state.result - (action as CalcOpAction).payload.num,
-        history: state.history.concat({ opName: '-', opValue: (action as CalcOpAction).payload.num }),
-      };
-    case MULTIPLY_ACTION:
-      return {
-        ...state,
-        result: state.result * (action as CalcOpAction).payload.num,
-        history: state.history.concat({ opName: '*', opValue: (action as CalcOpAction).payload.num }),
-      };
-    case DIVIDE_ACTION:
-      return {
-        ...state,
-        result: state.result / (action as CalcOpAction).payload.num,
-        history: state.history.concat({ opName: '/', opValue: (action as CalcOpAction).payload.num }),
-      };
-    case CLEAR_ACTION:
-      return {
-        ...state,
-        result: 0,
-        history: [],
-      };
-    case DELETE_HISTORY_ENTRY_ACTION:
-      return {
-        ...state,
-        history: state.history.filter(
-          (_, i) => i !== (action as CalcHistoryEntryAction).payload.historyEntryIndex),
-      }
-    case VALIDATION_ACTION:
-      return {
-        ...state,
-        validationMessage: (action as CalcValidationAction).payload.message,
-      }
-    default:
-      return state;
-  }
-
+  return {
+    result: resultReducer(state.result, action as CalcOpAction),
+    history: historyReducer(state.history, action as HistoryReducerAction),
+    validationMessage: validationMessageReducer(state.validationMessage, action as ValidationMessageReducerAction),
+  };
 };
+
+
+export const calcReducer = combineReducers<CalcState>({
+  result: resultReducer,
+  history: historyReducer,
+  validationMessage: validationMessageReducer,
+});

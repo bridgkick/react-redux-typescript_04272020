@@ -14,8 +14,6 @@ export interface CalcOpAction extends Action {
   },
 }
 
-
-
 type CalcOpActionCreator = (num: number) => CalcOpAction;
 
 export const createAddAction: CalcOpActionCreator = (num) => ({
