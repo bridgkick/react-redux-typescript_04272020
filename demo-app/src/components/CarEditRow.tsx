@@ -52,7 +52,7 @@ export const CarEditRow: FC<CarEditRowProps> = (props) =>  {
 
   return <tr>
     <td>{props.car.id}</td>
-    <td><input type="text" value={carForm.make} name="make" onChange={change} /></td>
+    <td><input type="text" id="edit-make-input" value={carForm.make} name="make" onChange={change} /></td>
     <td><input type="text" value={carForm.model} name="model" onChange={change} /></td>
     <td><input type="number" value={nanToBlank(carForm.year)} name="year" onChange={change} /></td>
     <td><input type="text" value={carForm.color} name="color" onChange={change} /></td>
