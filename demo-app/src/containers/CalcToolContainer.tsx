@@ -2,16 +2,19 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { HistoryEntry } from '../models/HistoryEntry';
 import { CalcState } from '../reducers/calcReducer';
 import { CalcTool } from '../components/CalcTool';
 import {
   createAddAction, createSubtractAction,
-  createMultiplyAction, createDivideAction
+  createMultiplyAction, createDivideAction,
+  createClearAction,
 } from '../actions/calcActions';
 
 export const CalcToolContainer = () => {
 
   const result = useSelector<CalcState, number>(state => state.result);
+  const history = useSelector<CalcState, HistoryEntry[]>(state => state.history);
 
   // const dispatch = useDispatch();
   // const onAdd = (num: number) => dispatch(createAddAction(num));
@@ -22,9 +25,10 @@ export const CalcToolContainer = () => {
     onSubtract: createSubtractAction,
     onMultiply: createMultiplyAction,
     onDivide: createDivideAction,
+    onClear: createClearAction,
   }, useDispatch());
 
   // return <CalcTool result={result} onAdd={onAdd} onSubtract={onSubtract} />;
-  return <CalcTool result={result} {...boundActionsMap} />;
+  return <CalcTool result={result} history={history} {...boundActionsMap} />;
 
 };

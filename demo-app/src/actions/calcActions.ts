@@ -4,6 +4,7 @@ export const ADD_ACTION = 'ADD';
 export const SUBTRACT_ACTION = 'SUBTRACT';
 export const MULTIPLY_ACTION = 'MULTIPLY';
 export const DIVIDE_ACTION = 'DIVIDE';
+export const CLEAR_ACTION = 'CLEAR';
 
 export interface CalcOpAction extends Action {
   payload: {
@@ -27,4 +28,8 @@ export const createMultiplyAction: CalcOpActionCreator = (num) => ({
 
 export const createDivideAction: CalcOpActionCreator = (num) => ({
   type: DIVIDE_ACTION, payload: { num }
+});
+
+export const createClearAction: () => CalcOpAction = () => ({
+  type: CLEAR_ACTION, payload: { num: NaN }
 });
