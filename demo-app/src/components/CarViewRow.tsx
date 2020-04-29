@@ -1,27 +1,15 @@
 import React, { FC } from 'react';
 
+import { validCarId } from '../utils';
 import { Car } from '../models/Car';
 
 export interface CarViewRowProps { 
   car: Car;
+  onEditCar: (carId: number) => void;
   onDeleteCar: (carId: number) => void;
 }
 
-const validCarId: (carId: number | undefined) => boolean = (carId) => {
-
-  if (typeof carId === "undefined") {
-    return false;
-  }
-
-  if (carId < 1) {
-    return false;
-  }
-
-  return true;
-
-};
-
-export const CarViewRow: FC<CarViewRowProps> = ({ car, onDeleteCar }) => {
+export const CarViewRow: FC<CarViewRowProps> = ({ car, onEditCar, onDeleteCar }) => {
 
   const deleteCar = () => {
 
@@ -39,6 +27,7 @@ export const CarViewRow: FC<CarViewRowProps> = ({ car, onDeleteCar }) => {
       <td>{car.color}</td>
       <td>{car.price}</td>
       <td>
+        <button type="button" onClick={() => car.id && onEditCar(car.id)}>Edit</button>
         {validCarId(car.id) && <button type="button" onClick={deleteCar}>
           Delete
         </button>}

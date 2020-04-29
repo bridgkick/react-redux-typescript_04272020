@@ -1,6 +1,7 @@
 import React, { FC, useState, ChangeEvent } from 'react';
 
 import { Car } from '../models/Car';
+import { blankToNaN, nanToBlank } from '../utils';
 
 export interface CarFormProps {
   buttonText?: string;
@@ -16,24 +17,6 @@ interface CarFormState {
 }
 
 type HTMLFormControls = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-
-const nanToBlank = (x: number) => {
-
-  if (isNaN(x)) {
-    return '';
-  } else {
-    return x;
-  }
-
-};
-
-const blankToNaN = (x: string) => {
-  if (x.length === 0) {
-    return NaN;
-  } else {
-    return Number(x);
-  }
-}
 
 export const CarForm: FC<CarFormProps> = ({ buttonText, onSubmitCar }) => {
 

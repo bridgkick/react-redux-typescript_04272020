@@ -13,6 +13,7 @@ export interface CarToolProps {
 export const CarTool: FC<CarToolProps> = (props) => {
 
   const [ cars, setCars ] = useState<Car[]>(props.cars.concat());
+  const [ editCarId, setEditCarId ] = useState<number>(-1);
 
   const addCar = (car: Car) => {
 
@@ -20,17 +21,28 @@ export const CarTool: FC<CarToolProps> = (props) => {
       ...car,
       id: Math.max(...cars.map(c => c.id) as [], 0) + 1,
     }));
-
+    setEditCarId(-1);
   }
 
   const deleteCar = (carId: number) => {
     setCars(cars.filter(c => c.id !== carId));
+    setEditCarId(-1);
+  }
+
+  const replaceCar = (car: Car) => {
+    const carIndex = cars.findIndex(c => c.id === car.id);
+    const newCars = cars.concat();
+    newCars[carIndex] = car;
+    setCars(newCars);
+    setEditCarId(-1);
   }
 
   return (
     <>
       <ToolHeader headerText="Car Tool" />
-      <CarTable cars={cars} onDeleteCar={deleteCar} />
+      <CarTable cars={cars} editCarId={editCarId}
+        onEditCar={setEditCarId} onDeleteCar={deleteCar}
+        onCancelCar={() => setEditCarId(-1)} onSaveCar={replaceCar} />
       <CarForm buttonText="Add Car" onSubmitCar={addCar} />
     </>
   );
