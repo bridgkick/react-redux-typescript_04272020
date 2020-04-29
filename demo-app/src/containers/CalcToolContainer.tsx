@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { CalcState } from '../reducers/calcReducer';
 import { CalcTool } from '../components/CalcTool';
-import { createAddAction, createSubtractAction } from '../actions/calcActions';
+import {
+  createAddAction, createSubtractAction,
+  createMultiplyAction, createDivideAction
+} from '../actions/calcActions';
 
 export const CalcToolContainer = () => {
 
@@ -17,6 +20,8 @@ export const CalcToolContainer = () => {
   const boundActionsMap = bindActionCreators({
     onAdd: createAddAction,
     onSubtract: createSubtractAction,
+    onMultiply: createMultiplyAction,
+    onDivide: createDivideAction,
   }, useDispatch());
 
   // return <CalcTool result={result} onAdd={onAdd} onSubtract={onSubtract} />;

@@ -1,6 +1,9 @@
 import { Reducer } from 'redux';
 
-import { CalcOpAction, ADD_ACTION, SUBTRACT_ACTION } from '../actions/calcActions';
+import { CalcOpAction,
+  ADD_ACTION, SUBTRACT_ACTION,
+  MULTIPLY_ACTION, DIVIDE_ACTION,
+} from '../actions/calcActions';
 
 export interface CalcState {
   result: number;
@@ -20,6 +23,16 @@ export const calcReducer: CalcReducer = (state = { result: 0 }, action) => {
       return {
         ...state,
         result: state.result - action.payload.num,
+      };
+    case MULTIPLY_ACTION:
+      return {
+        ...state,
+        result: state.result * action.payload.num,
+      };
+    case DIVIDE_ACTION:
+      return {
+        ...state,
+        result: state.result / action.payload.num,
       };
     default:
       return state;
