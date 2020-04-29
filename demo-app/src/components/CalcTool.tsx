@@ -5,25 +5,40 @@ import { HistoryEntry } from '../models/HistoryEntry';
 export interface CalcToolProps {
   result: number;
   history: HistoryEntry[];
+  validationMessage: string;
   onAdd: (num: number) => void;
   onSubtract: (num: number) => void;
   onMultiply: (num: number) => void;
   onDivide: (num: number) => void;
   onClear: () => void;
+  onDeleteHistoryEntry: (historyEntryIndex: number) => void;
+  onValidation: (message: string) => void;
 }
 
 export const CalcTool: FC<CalcToolProps> = (props) => {
 
   const {
-    result, history,
+    result, history, validationMessage,
     onAdd, onSubtract, onMultiply, onDivide,
-    onClear,
+    onClear, onDeleteHistoryEntry, onValidation,
   } = props;
 
   const [ num, setNum ] = useState(0);
 
+  const validateAndDoOp = (opFunc: Function, num: number) => {
+
+    if (num < 0 || num > 10) {
+      onValidation('Number needs to be between 0 and 10 inclusive');
+      return;
+    }
+
+    onValidation('');
+    opFunc(num);
+  };
+
   return (
     <form>
+      {validationMessage && <p>{validationMessage}</p>}
       <div>Result: {result}</div>
       <div>
         Input:
@@ -31,15 +46,18 @@ export const CalcTool: FC<CalcToolProps> = (props) => {
           onChange={(e: ChangeEvent<HTMLInputElement>) => setNum(Number(e.target.value))} />
       </div>
       <div>
-        <button type="button" onClick={() => onAdd(num)}>+</button>
-        <button type="button" onClick={() => onSubtract(num)}>-</button>
-        <button type="button" onClick={() => onMultiply(num)}>*</button>
-        <button type="button" onClick={() => onDivide(num)}>/</button>
+        <button type="button" onClick={() => validateAndDoOp(onAdd, num)}>+</button>
+        <button type="button" onClick={() => validateAndDoOp(onSubtract, num)}>-</button>
+        <button type="button" onClick={() => validateAndDoOp(onMultiply, num)}>*</button>
+        <button type="button" onClick={() => validateAndDoOp(onDivide, num)}>/</button>
         <button type="button" onClick={() => { onClear(); setNum(0); }}>Clear</button>
       </div>
       <ul>
         {history.map((historyEntry, i) => {
-          return <li key={i}>{historyEntry.opName} {historyEntry.opValue}</li>;
+          return <li key={i}>
+            {historyEntry.opName} {historyEntry.opValue}
+            <button type="button" onClick={() => onDeleteHistoryEntry(i)}>X</button>
+          </li>;
         })}
       </ul>
     </form>

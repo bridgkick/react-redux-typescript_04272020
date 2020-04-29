@@ -8,13 +8,15 @@ import { CalcTool } from '../components/CalcTool';
 import {
   createAddAction, createSubtractAction,
   createMultiplyAction, createDivideAction,
-  createClearAction,
+  createClearAction, createDeleteHistoryEntryAction,
+  createValidationAction,
 } from '../actions/calcActions';
 
 export const CalcToolContainer = () => {
 
   const result = useSelector<CalcState, number>(state => state.result);
   const history = useSelector<CalcState, HistoryEntry[]>(state => state.history);
+  const validationMessage = useSelector<CalcState, string>(state => state.validationMessage);
 
   // const dispatch = useDispatch();
   // const onAdd = (num: number) => dispatch(createAddAction(num));
@@ -26,9 +28,13 @@ export const CalcToolContainer = () => {
     onMultiply: createMultiplyAction,
     onDivide: createDivideAction,
     onClear: createClearAction,
+    onDeleteHistoryEntry:  createDeleteHistoryEntryAction,
+    onValidation: createValidationAction,
   }, useDispatch());
 
   // return <CalcTool result={result} onAdd={onAdd} onSubtract={onSubtract} />;
-  return <CalcTool result={result} history={history} {...boundActionsMap} />;
+  return <CalcTool
+    result={result} history={history} validationMessage={validationMessage}
+    {...boundActionsMap} />;
 
 };
