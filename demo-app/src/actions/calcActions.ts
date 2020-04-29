@@ -12,6 +12,12 @@ export interface CalcOpAction extends Action {
   },
 }
 
+export interface CalcFakeAction extends Action {
+  payload: {
+    msg: string,
+  },
+}
+
 type CalcOpActionCreator = (num: number) => CalcOpAction;
 
 export const createAddAction: CalcOpActionCreator = (num) => ({

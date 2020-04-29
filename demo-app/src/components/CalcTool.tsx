@@ -12,11 +12,13 @@ export interface CalcToolProps {
   onClear: () => void;
 }
 
-export const CalcTool: FC<CalcToolProps> = ({
-  result, history,
-  onAdd, onSubtract, onMultiply, onDivide,
-  onClear,
-}) => {
+export const CalcTool: FC<CalcToolProps> = (props) => {
+
+  const {
+    result, history,
+    onAdd, onSubtract, onMultiply, onDivide,
+    onClear,
+  } = props;
 
   const [ num, setNum ] = useState(0);
 

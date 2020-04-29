@@ -2,9 +2,11 @@ import { Reducer } from 'redux';
 
 import { HistoryEntry } from '../models/HistoryEntry';
 
-import { CalcOpAction,
+import {
+  CalcOpAction, CalcFakeAction,
   ADD_ACTION, SUBTRACT_ACTION,
-  MULTIPLY_ACTION, DIVIDE_ACTION, CLEAR_ACTION,
+  MULTIPLY_ACTION, DIVIDE_ACTION,
+  CLEAR_ACTION,
 } from '../actions/calcActions';
 
 export interface CalcState {
@@ -12,7 +14,9 @@ export interface CalcState {
   history: HistoryEntry[],
 }
 
-type CalcReducer = Reducer<CalcState, CalcOpAction>;
+type CalcReducerAction = CalcOpAction | CalcFakeAction;
+
+type CalcReducer = Reducer<CalcState, CalcReducerAction>;
 
 export const calcReducer: CalcReducer = (state = { result: 0, history: [] }, action) => {
 
@@ -20,8 +24,9 @@ export const calcReducer: CalcReducer = (state = { result: 0, history: [] }, act
     case ADD_ACTION:
       return {
         ...state,
-        result: state.result + action.payload.num,
-        history: state.history.concat({ opName: '+', opValue: action.payload.num }),
+        result: state.result + (('num' in action.payload) ? action.payload.num : 0),
+        // result: state.result + (action as CalcOpAction).payload.num,
+        history: state.history.concat({ opName: '+', opValue: (action as CalcOpAction).payload.num }),
       };
     case SUBTRACT_ACTION:
       return {
