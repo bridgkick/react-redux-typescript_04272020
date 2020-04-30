@@ -13,15 +13,51 @@ import {
 } from '../actions/calcActions';
 
 const calculateResult = (history: HistoryEntry[]) => {
-  // do the calc
-  return 0;
+  return history.reduce( (r: number, he: HistoryEntry) => { 
+    switch(he.opName) {
+      case '+':
+        return r + he.opValue;
+      case '-':
+        return r - he.opValue;
+      case '*':
+        return r * he.opValue;
+      case '/':
+        return r / he.opValue;
+      default:
+        return r;
+    }
+  }, 0);
 }
+
+const countOps = (history: HistoryEntry[]) => {
+  return history.reduce( (r: number[], he: HistoryEntry) => { 
+    switch(he.opName) {
+      case '+':
+        r[0] = r[0] + 1;
+        return r;
+      case '-':
+        r[1] = r[1] + 1;
+        return r;
+      case '*':
+        r[2] = r[2] + 1;
+        return r;
+      case '/':
+        r[3] = r[3] + 1;
+        return r;
+      default:
+        return r;
+    }
+  }, [0,0,0,0]);
+}
+
 
 export const CalcToolContainer = () => {
 
-  const result = useSelector<CalcState, number>(state => state.result);
+  // const result = useSelector<CalcState, number>(state => state.result);
   const history = useSelector<CalcState, HistoryEntry[]>(state => state.history);
   const validationMessage = useSelector<CalcState, string>(state => state.validationMessage);
+
+  const [ addCount, subtractCount, multiplyCount, divideCount ] = countOps(history);
 
   // const dispatch = useDispatch();
   // const onAdd = (num: number) => dispatch(createAddAction(num));
@@ -40,6 +76,8 @@ export const CalcToolContainer = () => {
   // return <CalcTool result={result} onAdd={onAdd} onSubtract={onSubtract} />;
   return <CalcTool
     result={calculateResult(history)} history={history} validationMessage={validationMessage}
+    addCount={addCount} subtractCount={subtractCount}
+    multiplyCount={multiplyCount} divideCount={divideCount}
     {...boundActionsMap} />;
 
 };

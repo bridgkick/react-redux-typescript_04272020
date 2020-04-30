@@ -6,6 +6,10 @@ export interface CalcToolProps {
   result: number;
   history: HistoryEntry[];
   validationMessage: string;
+  addCount: number;
+  subtractCount: number;
+  multiplyCount: number;
+  divideCount: number;
   onAdd: (num: number) => void;
   onSubtract: (num: number) => void;
   onMultiply: (num: number) => void;
@@ -19,6 +23,7 @@ export const CalcTool: FC<CalcToolProps> = (props) => {
 
   const {
     result, history, validationMessage,
+    addCount, subtractCount, multiplyCount, divideCount,
     onAdd, onSubtract, onMultiply, onDivide,
     onClear, onDeleteHistoryEntry, onValidation,
   } = props;
@@ -60,6 +65,25 @@ export const CalcTool: FC<CalcToolProps> = (props) => {
           </li>;
         })}
       </ul>
+      <table>
+        <thead>
+          <tr>
+            <th>Add</th>
+            <th>Subtract</th>
+            <th>Multiply</th>
+            <th>Divide</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{addCount}</td>
+            <td>{subtractCount}</td>
+            <td>{multiplyCount}</td>
+            <td>{divideCount}</td>
+          </tr>
+        </tbody>
+      </table>
+
     </form>
   );
 
