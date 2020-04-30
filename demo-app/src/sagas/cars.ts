@@ -5,7 +5,7 @@ import {
   APPEND_CAR_REQUEST_ACTION,
   createRefreshCarsRequestAction,
   createRefreshCarsDoneAction,
-  CarAction, CarIdAction
+  CarAction, CarIdAction, DELETE_CAR_REQUEST_ACTION, REPLACE_CAR_REQUEST_ACTION
 } from '../actions/carActions';
 
 export function* refreshCars() {
@@ -30,9 +30,39 @@ export function* appendCar(action: CarAction) {
   yield put(createRefreshCarsRequestAction());
 }
 
+export function* replaceCar(action: CarAction) {
+
+  yield call(
+    fetch,
+    'http://localhost:3060/cars/' + action.payload.car.id,
+    {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(action.payload.car),
+    },
+  );
+
+  yield put(createRefreshCarsRequestAction());
+}
+
+export function* deleteCar(action: CarIdAction) {
+
+  yield call(
+    fetch,
+    'http://localhost:3060/cars/' + action.payload.carId,
+    {
+      method: 'DELETE',
+    },
+  );
+
+  yield put(createRefreshCarsRequestAction());
+}
+
 export function* carsSaga() {
 
   yield takeLatest(REFRESH_CARS_REQUEST_ACTION, refreshCars);
   yield takeEvery(APPEND_CAR_REQUEST_ACTION, appendCar);
+  yield takeEvery(REPLACE_CAR_REQUEST_ACTION, replaceCar);
+  yield takeEvery(DELETE_CAR_REQUEST_ACTION, deleteCar);
 
 }

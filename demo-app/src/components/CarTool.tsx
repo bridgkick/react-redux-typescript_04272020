@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 import { Car } from '../models/Car';
 
@@ -18,14 +18,6 @@ export interface CarToolProps {
 }
 
 export const CarTool: FC<CarToolProps> = (props) => {
-
-  const { onRefreshCars } = props;
-
-  useEffect(() => {
-    
-    onRefreshCars();
-
-  }, [ onRefreshCars ])
 
   return (
     <>
