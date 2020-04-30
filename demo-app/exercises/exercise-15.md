@@ -6,18 +6,18 @@
 
 Save Command
 
-Method: PUT
-Include the Headers
-Include the Body
-URL will need the car id at the end
-http://localhost:3060/cars/3
+- Method: PUT
+- Include the Headers
+- Include the Body
+- URL will need the car id at the end
+  - http://localhost:3060/cars/3
 
 Delete Command
 
-Method: DELETE
-No Headers
-No Body
-URL will need the car id at the end
-http://localhost:3060/cars/3
+- Method: DELETE
+- No Headers
+- No Body
+- URL will need the car id at the end
+  - http://localhost:3060/cars/3
 
 2. Ensure it works!
