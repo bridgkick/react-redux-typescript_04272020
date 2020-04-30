@@ -12,6 +12,11 @@ import {
   createValidationAction,
 } from '../actions/calcActions';
 
+const calculateResult = (history: HistoryEntry[]) => {
+  // do the calc
+  return 0;
+}
+
 export const CalcToolContainer = () => {
 
   const result = useSelector<CalcState, number>(state => state.result);
@@ -34,7 +39,7 @@ export const CalcToolContainer = () => {
 
   // return <CalcTool result={result} onAdd={onAdd} onSubtract={onSubtract} />;
   return <CalcTool
-    result={result} history={history} validationMessage={validationMessage}
+    result={calculateResult(history)} history={history} validationMessage={validationMessage}
     {...boundActionsMap} />;
 
 };
