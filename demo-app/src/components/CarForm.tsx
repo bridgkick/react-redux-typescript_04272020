@@ -20,7 +20,8 @@ type HTMLFormControls = HTMLInputElement | HTMLSelectElement | HTMLTextAreaEleme
 
 export const CarForm: FC<CarFormProps> = ({ buttonText, onSubmitCar }) => {
 
-  const [ validationMessage, setValidationMessage ] = useState<string>('');
+  // move to redux
+  // const [ validationMessage, setValidationMessage ] = useState<string>('');
 
   const [ carForm, setCarForm ] = useState<CarFormState>({
     make: '',
@@ -43,21 +44,21 @@ export const CarForm: FC<CarFormProps> = ({ buttonText, onSubmitCar }) => {
 
   const submitCar = () => {
 
-    if (isNaN(carForm.year)) {
-      setValidationMessage('Enter a number for year.');
-      return;
-    }
+    // if (isNaN(carForm.year)) {
+    //   setValidationMessage('Enter a number for year.');
+    //   return;
+    // }
 
-    if (isNaN(carForm.price)) {
-      setValidationMessage('Enter a number for price.');
-      return;
-    }
+    // if (isNaN(carForm.price)) {
+    //   setValidationMessage('Enter a number for price.');
+    //   return;
+    // }
 
     onSubmitCar({
       ...carForm,
     });
 
-    setValidationMessage('');
+    // setValidationMessage('');
     setCarForm({
       make: '',
       model: '',
@@ -69,7 +70,7 @@ export const CarForm: FC<CarFormProps> = ({ buttonText, onSubmitCar }) => {
 
   return (
     <form>
-      {validationMessage && <p>Error: {validationMessage}</p>}
+      {/* {validationMessage && <p>Error: {validationMessage}</p>} */}
       <div>
         <label htmlFor="make-input">Make:</label>
         <input type="text" id="make-input" name="make"
