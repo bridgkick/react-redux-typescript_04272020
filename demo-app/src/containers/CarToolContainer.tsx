@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { bindActionCreators } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -27,8 +27,8 @@ const useMapDispatchToProps = () => {
   }, useDispatch());
 };
 
-export const CarToolContainer = () => {
+export const CarToolContainer: FC<{}> = (props) => {
 
-  return <CarTool {...useMapStateToProps()} {...useMapDispatchToProps()} />;
+  return <CarTool {...props} {...useMapStateToProps()} {...useMapDispatchToProps()} />;
 
 };

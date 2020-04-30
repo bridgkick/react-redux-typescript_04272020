@@ -3,7 +3,7 @@ import { Reducer } from 'redux';
 import { Car } from '../models/Car';
 import { CarAction, CarIdAction, APPEND_CAR_ACTION, REPLACE_CAR_ACTION, DELETE_CAR_ACTION } from '../actions/carActions';
 
-export type CarsReducerAction = CarAction |  CarIdAction;
+export type CarsReducerAction = CarAction | CarIdAction;
 
 type CarsReducer = Reducer<Car[], CarsReducerAction>;
 
