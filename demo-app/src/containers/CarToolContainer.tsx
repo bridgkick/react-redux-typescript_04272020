@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
-import { bindActionCreators } from 'redux';
+import React, { FC, useMemo } from 'react';
+import { bindActionCreators, Dispatch } from 'redux';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Car } from '../models/Car';
 import { CarState } from '../reducers/carReducer';
 import { CarTool } from '../components/CarTool';
 import {
-  createAppendCarAction, createReplaceCarAction, createDeleteCarAction,
+  createRefreshCarsRequestAction, createAppendCarRequestAction,
+  createReplaceCarAction, createDeleteCarAction,
   createEditCarAction, createCancelCarAction,
 } from '../actions/carActions';
 
@@ -17,18 +18,24 @@ const useMapStateToProps = () => {
   };
 };
 
-const useMapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return bindActionCreators({
-    onAppendCar: createAppendCarAction,
+    onRefreshCars: createRefreshCarsRequestAction,
+    onAppendCar: createAppendCarRequestAction,
     onReplaceCar: createReplaceCarAction,
     onDeleteCar: createDeleteCarAction,
     onEditCar: createEditCarAction,
     onCancelCar: createCancelCarAction,
-  }, useDispatch());
+  }, dispatch);
 };
 
 export const CarToolContainer: FC<{}> = (props) => {
 
-  return <CarTool {...props} {...useMapStateToProps()} {...useMapDispatchToProps()} />;
+  const dispatch = useDispatch();
+
+  const dispatchProps = useMemo(() => mapDispatchToProps(dispatch), [ dispatch ])
+
+  return <CarTool {...props} {...useMapStateToProps()}
+    {...dispatchProps} />;
 
 };

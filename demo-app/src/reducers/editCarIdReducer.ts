@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 
 import {
-  CarIdAction, APPEND_CAR_ACTION, REPLACE_CAR_ACTION,
+  CarIdAction, REFRESH_CARS_DONE_ACTION, REPLACE_CAR_ACTION,
   DELETE_CAR_ACTION, EDIT_CAR_ACTION, CANCEL_CAR_ACTION,
 } from '../actions/carActions';
 
@@ -12,7 +12,7 @@ type CarsReducer = Reducer<number, EditCarIdReducerAction>;
 export const editCarIdReducer: CarsReducer = (editCarId = -1, action) => {
 
   if ([
-    APPEND_CAR_ACTION, REPLACE_CAR_ACTION,
+    REFRESH_CARS_DONE_ACTION, REPLACE_CAR_ACTION,
     DELETE_CAR_ACTION, CANCEL_CAR_ACTION,
   ].includes(action.type)) {
     return -1;

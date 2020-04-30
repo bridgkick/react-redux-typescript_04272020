@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 
 import { carReducer } from '../reducers/carReducer';
-import { carsSaga } from './sagas/cars';
+import { carsSaga } from '../sagas/cars';
 
 const sagaMiddleware = createSagaMiddleware();
 
