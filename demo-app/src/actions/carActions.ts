@@ -2,11 +2,19 @@ import { Action } from 'redux';
 
 import { Car } from '../models/Car';
 
-export const APPEND_CAR_ACTION = 'APPEND_CAR';
+export const REFRESH_CARS_REQUEST_ACTION = 'REFRESH_CARS_REQUEST';
+export const REFRESH_CARS_DONE_ACTION = 'REFRESH_CARS_DONE';
+export const APPEND_CAR_REQUEST_ACTION = 'APPEND_CAR_REQUEST';
 export const REPLACE_CAR_ACTION = 'REPLACE_CAR';
 export const DELETE_CAR_ACTION = 'DELETE_CAR';
 export const EDIT_CAR_ACTION = 'EDIT_CAR';
 export const CANCEL_CAR_ACTION = 'CANCEL_CAR';
+
+export interface CarsAction extends Action {
+  payload: {
+    cars: Car[],
+  },
+}
 
 export interface CarAction extends Action {
   payload: {
@@ -22,12 +30,22 @@ export interface CarIdAction extends Action {
 
 type ActionCreator = () => Action;
 
+type CarsActionCreator = (cars: Car[]) => CarsAction;
+
 type CarActionCreator = (car: Car) => CarAction;
 
 type CarIdActionCreator = (carId: number) => CarIdAction;
 
-export const createAppendCarAction: CarActionCreator = car => ({
-   type: APPEND_CAR_ACTION, payload: { car },
+export const createRefreshCarsRequestAction: ActionCreator = () => ({
+  type: REFRESH_CARS_REQUEST_ACTION,
+});
+
+export const createRefreshCarsDoneAction: CarsActionCreator = cars => ({
+  type: REFRESH_CARS_DONE_ACTION, payload: { cars },
+});
+
+export const createAppendCarRequestAction: CarActionCreator = car => ({
+   type: APPEND_CAR_REQUEST_ACTION, payload: { car },
 });
 
 export const createReplaceCarAction: CarActionCreator = car => ({
