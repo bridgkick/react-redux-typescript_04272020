@@ -1,7 +1,8 @@
-import React, { FC, useState, ChangeEvent } from 'react';
+import React, { FC } from 'react';
 
 import { Car } from '../models/Car';
-import { blankToNaN, nanToBlank } from '../utils';
+import { nanToBlank } from '../utils';
+import { useForm } from '../hooks/useForm';
 
 export interface CarFormProps {
   buttonText?: string;
@@ -23,24 +24,13 @@ export const CarForm: FC<CarFormProps> = ({ buttonText, onSubmitCar }) => {
   // move to redux
   // const [ validationMessage, setValidationMessage ] = useState<string>('');
 
-  const [ carForm, setCarForm ] = useState<CarFormState>({
+  const [ carForm, change, resetCarForm ] = useForm<CarFormState>({
     make: '',
     model: '',
     year: NaN,
     color: '',
     price: NaN,
   });
-
-  const change = (e: ChangeEvent<HTMLFormControls>) => {
-
-    setCarForm({
-      ...carForm,
-      [ e.target.name ]: e.target.type === 'number'
-        ? blankToNaN(e.target.value)
-        : e.target.value,
-    });
-
-  };
 
   const submitCar = () => {
 
@@ -59,13 +49,7 @@ export const CarForm: FC<CarFormProps> = ({ buttonText, onSubmitCar }) => {
     });
 
     // setValidationMessage('');
-    setCarForm({
-      make: '',
-      model: '',
-      year: NaN,
-      color: '',
-      price: NaN,
-    });
+    resetCarForm();
   };
 
   return (
